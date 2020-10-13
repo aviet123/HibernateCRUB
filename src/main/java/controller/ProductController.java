@@ -1,17 +1,19 @@
 package controller;
 
 
+import model.Category;
 import model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import service.product.ProductService;
+import org.springframework.web.bind.annotation.*;
+import service.CategoryService;
+import service.ProductService;
 
-import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/products")
@@ -20,16 +22,25 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
+    @Autowired
+    CategoryService categoryService;
+
     @GetMapping("")
-    public String getIndex(Model model){
-        Iterable<Product> products = productService.findAll();
+    public String getIndex(@PageableDefault(size = 5)Pageable pageable, @RequestParam("s") Optional<String> s, Model model){
+        Page<Product> products;
+        if (s.isPresent()){
+            products = productService.findAllByNameContaining(s.get(),pageable);
+        }else {
+            products = productService.findAll(pageable);
+        }
         model.addAttribute("products",products);
-        return "index";
+        return "product/index";
     }
+
     @GetMapping("/create")
     public String showCreateForm(Model model){
         model.addAttribute("product", new Product());
-        return "create";
+        return "product/create";
     }
 
     @PostMapping("/create")
@@ -42,7 +53,7 @@ public class ProductController {
     public String showDeleteForm(@PathVariable("id") int id, Model model){
         Product product = productService.findById(id);
         model.addAttribute("product",product);
-        return "delete";
+        return "product/delete";
     }
 
     @PostMapping("/delete/{id}")
@@ -55,11 +66,18 @@ public class ProductController {
     public String showEditForm(@PathVariable("id") int id, Model model){
         Product product = productService.findById(id);
         model.addAttribute("product",product);
-        return "edit";
+        return "product/edit";
     }
     @PostMapping("/update")
     public String editProduct(Product product, Model model){
         productService.save(product);
         return "redirect:/products";
     }
+
+    @ModelAttribute("categories")
+    public Iterable<Category> getCategories(){
+        return categoryService.findAll();
+    }
+
+
 }
