@@ -30,6 +30,7 @@ public class ProductController {
         Page<Product> products;
         if (s.isPresent()){
             products = productService.findAllByNameContaining(s.get(),pageable);
+            model.addAttribute("s",s.get());
         }else {
             products = productService.findAll(pageable);
         }
