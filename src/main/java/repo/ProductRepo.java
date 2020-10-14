@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface ProductRepo extends PagingAndSortingRepository<Product, Integer> {
-        Iterable<Product> findAllByCategory(Category category);
+        Page<Product> findAllByCategory(Category category, Pageable pageable);
 
         Page<Product> findAll(Pageable pageable);
 

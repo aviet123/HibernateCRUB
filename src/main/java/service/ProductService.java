@@ -10,7 +10,7 @@ public interface ProductService {
     Product findById(int id);
     void save(Product product);
     void delete(int id);
-    Iterable<Product> findAllByCategory(Category category);
+    Page<Product> findAllByCategory(Category category, Pageable pageable);
     Page<Product> findAll(Pageable pageable);
     Page<Product> findAllByNameContaining(String name,Pageable pageable);
 }

@@ -35,8 +35,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Iterable<Product> findAllByCategory(Category category) {
-        return productRepo.findAllByCategory(category);
+    public Page<Product> findAllByCategory(Category category, Pageable pageable) {
+        return productRepo.findAllByCategory(category, pageable);
     }
 
     @Override

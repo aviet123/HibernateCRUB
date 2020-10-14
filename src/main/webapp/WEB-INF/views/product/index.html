@@ -12,6 +12,14 @@
     <input type="text" name="s" th:value="${s}">
     <input type="submit" value="search">
 </form>
+<form th:action="@{'/products/search'}" method="post">
+    <select th:name="category" th:id="category">
+        <th:block th:each="c :${categories}">
+            <option th:value="${c.id}" th:text="${c.name}"></option>
+        </th:block>
+    </select>
+    <input type="submit" value="Search">
+</form>
 <table border="1">
     <tr>
         <td>Id</td>

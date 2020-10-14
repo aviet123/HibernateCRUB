@@ -31,10 +31,16 @@ public class ProductController {
         if (s.isPresent()){
             products = productService.findAllByNameContaining(s.get(),pageable);
             model.addAttribute("s",s.get());
-        }else {
+        }else{
             products = productService.findAll(pageable);
         }
         model.addAttribute("products",products);
+        return "product/index";
+    }
+
+    @PostMapping("/search")
+   public String getProductsByCategory(@ModelAttribute Category category, Model model,@PageableDefault(size = 5) Pageable pageable){
+        model.addAttribute("products", productService.findAllByCategory(category,pageable));
         return "product/index";
     }
 

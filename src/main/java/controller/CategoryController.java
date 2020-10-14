@@ -25,14 +25,14 @@ public class CategoryController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/views/{id}")
-    public String viewCategory(@PathVariable("id") Long id,Model model){
-        Category category = categoryService.findById(id);
-        Iterable<Product> products = productService.findAllByCategory(category);
-        model.addAttribute("category",category);
-        model.addAttribute("products",products);
-        return "category/view";
-    }
+//    @GetMapping("/views/{id}")
+//    public String viewCategory(@PathVariable("id") Long id,Model model){
+//        Category category = categoryService.findById(id);
+//        Iterable<Product> products = productService.findAllByCategory(category);
+//        model.addAttribute("category",category);
+//        model.addAttribute("products",products);
+//        return "category/view";
+//    }
 
     @GetMapping("")
     public String getIndex(Model model){
