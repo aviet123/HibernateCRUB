@@ -1,5 +1,6 @@
 package service;
 
+import exception.NotFoundException;
 import model.Category;
 import model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product findById(int id) {
-        return productRepo.findOne(id);
+    public Product findById(int id) throws NotFoundException{
+        Product product = productRepo.findOne(id);
+        if(product != null){
+            return product;
+        }else
+            throw new NotFoundException();
     }
 
     @Override

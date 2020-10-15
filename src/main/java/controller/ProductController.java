@@ -1,6 +1,7 @@
 package controller;
 
 
+import exception.NotFoundException;
 import model.Category;
 import model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,7 @@ public class ProductController {
     }
 
     @GetMapping("/delete/{id}")
-    public String showDeleteForm(@PathVariable("id") int id, Model model){
+    public String showDeleteForm(@PathVariable("id") int id, Model model) throws NotFoundException {
         Product product = productService.findById(id);
         model.addAttribute("product",product);
         return "product/delete";
@@ -70,11 +71,13 @@ public class ProductController {
     }
 
     @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable("id") int id, Model model){
+    public String showEditForm(@PathVariable("id") int id, Model model) throws NotFoundException{
         Product product = productService.findById(id);
         model.addAttribute("product",product);
         return "product/edit";
     }
+
+
     @PostMapping("/update")
     public String editProduct(Product product, Model model){
         productService.save(product);
@@ -84,6 +87,11 @@ public class ProductController {
     @ModelAttribute("categories")
     public Iterable<Category> getCategories(){
         return categoryService.findAll();
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public String showNotFoundException(){
+        return "notfound";
     }
 
 
