@@ -11,10 +11,10 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private String name;
-    private String brand;
+    private double price;
 
     @ManyToOne
-    @JoinColumn(name = "Category_id")
+    @JoinColumn(name = "category_id")
     private Category category;
 
     public Category getCategory() {
@@ -44,11 +44,22 @@ public class Product {
         this.name = name;
     }
 
-    public String getBrand() {
-        return brand;
+    public double getPrice() {
+        return price;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setPrice(double brand) {
+        this.price = brand;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", category=" + category +
+                '}';
     }
 }
