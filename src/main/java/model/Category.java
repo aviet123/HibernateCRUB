@@ -2,6 +2,7 @@ package model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,6 +17,7 @@ public class Category {
     private String name;
 
     @OneToMany(targetEntity = Product.class)
+//    @JsonIgnoreProperties(value = "category")
     @JsonIgnore
     private List<Product> products;
 

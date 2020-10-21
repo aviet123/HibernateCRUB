@@ -47,7 +47,7 @@ public class CategoryRestController {
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/categories/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/categories/{id}", method = RequestMethod.PUT,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Category> updateProduct(@PathVariable("id") Long id, @RequestBody Category category) throws NotFoundException {
         System.out.println("update category with id is " + id);
         Category category1 = categoryService.findById(id);

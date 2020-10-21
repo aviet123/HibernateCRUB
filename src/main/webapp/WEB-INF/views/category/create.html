@@ -3,20 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        function addCategory() {
+
+            let categoryName = $('#categoryName').val();
+            let newCategory ={
+                name : categoryName
+            };
+            $.ajax({
+                headers : {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                type: "POST",
+                data: JSON.stringify(newCategory),
+                url :"/categories/",
+            });
+            event.preventDefault();
+        }
+
+        $(document).ready(function () {
+            $("#load").click(function (event) {
+                $('#viewName').load('/categories')
+            })
+        })
+    </script>
 </head>
 <body>
 <h1>Create Product Form</h1>
 <!--<th:block th:if="${message}">-->
 <!--    <p th:text="${message}"></p>-->
 <!--</th:block>-->
-<form action="#" th:action="@{/categories/create}" method="post" th:object="${category}">
+<form id="addCategory">
     <table>
         <tr>
             <td>Name:</td>
-            <td><input type="text" th:field="*{name}"></td>
+            <td><input type="text" id="categoryName"></td>
         </tr>
-        <td><input type="submit" value="Save"></td>
+        <td><input type="submit" id="load" value="Save" onclick="addCategory()"></td>
     </table>
 </form>
+<div id="viewName"></div>
 </body>
 </html>

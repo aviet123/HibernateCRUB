@@ -996,28 +996,24 @@ SELECT|sys.sys_config:null
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="308" parent="297" name="brand">
+    <column id="308" parent="297" name="name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="309" parent="297" name="name">
+    <column id="309" parent="297" name="Category_id">
       <Position>3</Position>
-      <DataType>varchar(255)|0s</DataType>
-    </column>
-    <column id="310" parent="297" name="Category_id">
-      <Position>4</Position>
       <DataType>bigint|0s</DataType>
     </column>
-    <column id="311" parent="297" name="price">
-      <Position>5</Position>
+    <column id="310" parent="297" name="price">
+      <Position>4</Position>
       <DataType>double|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="312" parent="297" name="FKafoqtltpifxywfpl5b102yc69">
+    <index id="311" parent="297" name="FKafoqtltpifxywfpl5b102yc69">
       <ColNames>Category_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="313" parent="297" name="PRIMARY">
+    <key id="312" parent="297" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

@@ -3,12 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#editCategoryForm').submit(function (event) {
+                const name = $('#name').val();
+                const id = $('#id').val();
+                const json = {"name": name, "id": id};
+                $.ajax({
+                    headers : {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    url: "/categories/" + id,
+                    data: JSON.stringify(json),
+                    type: "PUT",
+                });
+                event.preventDefault();
+            });
+        });
+    </script>
 </head>
 <body>
 <h1>Edit Category</h1>
-<form action="#" th:action="@{/categories/edit}" method="post" th:object="${category}">
+<form id="editCategoryForm" th:object="${category}">
     <fieldset>
-        <legend>Edit Product Form</legend>
+        <legend>Edit Category Form</legend>
         <input type="text" hidden th:field="*{id}">
         <table>
             <tr>
@@ -16,7 +36,6 @@
                 <td><input type="text" th:field="*{name}"></td>
             </tr>
             <td><input type="submit" value="Save"></td>
-
         </table>
     </fieldset>
 </form>

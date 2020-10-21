@@ -34,7 +34,7 @@ public class CategoryController {
 //        return "category/view";
 //    }
 
-    @GetMapping("")
+    @GetMapping("/list")
     public String getIndex(Model model){
        Iterable<Category> categories = categoryService.findAll();
        model.addAttribute("categories", categories);
@@ -54,11 +54,11 @@ public class CategoryController {
         return "redirect:/categories";
     }
 
-    @GetMapping("/delete/{id}")
-    public String showDeleteForm(@PathVariable("id") Category category, Model model){
-        model.addAttribute("category",category);
-        return "/category/delete";
-    }
+//    @GetMapping("/delete/{id}")
+//    public String showDeleteForm(@PathVariable("id") Category category, Model model){
+//        model.addAttribute("category",category);
+//        return "/category/delete";
+//    }
 
     @PostMapping("/delete/{id}")
     public String deleteCategory(@PathVariable("id") Long id, Model model){
